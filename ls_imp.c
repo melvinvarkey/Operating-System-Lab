@@ -34,8 +34,8 @@ int ex_a()
   printf("Directory name: %s\n",pname);
   count = scandir(pname, &fl, f_sel, asort);
   if(count <= 0)
-    die("No file in this directory\n");
-  printf("Number of fl = %d\n",count); 
+    die("Empty Directory\n");
+  printf("count: %d\n",count); 
   for (i=1; i<count+1; ++i)
     printf("%s\n ",fl[i-1]->d_name);
   printf("\n");
@@ -48,8 +48,8 @@ int ex_l()
   struct dirent **fl;
   struct stat sb;
   char datestring[256];
-  struct passwd pwent;
-  struct passwd *pwentp;
+  struct passwd pw;
+  struct passwd *pwp;
   struct group grp;
   struct group *grpt;
   struct tm time;
@@ -61,8 +61,8 @@ int ex_l()
      printf("pname name is = %s\n" , pname);
    for (i=0; i<count; ++i)
    {  
-     if (!getpwuid_r(sb.st_uid, &pwent, buf, sizeof(buf), &pwentp))
-       printf(" %s", pwent.pw_name);
+     if (!getpwuid_r(sb.st_uid, &pw, buf, sizeof(buf), &pwp))
+       printf(" %s", pw.pw_name);
      else
        printf(" %d", sb.st_uid);
      if (!getgrgid_r (sb.st_gid, &grp, buf, sizeof(buf), &grpt))
@@ -86,8 +86,8 @@ int ex_lp()
   struct dirent **fl;
   struct stat sb;
   char datestring[256];
-  struct passwd pwent;
-  struct passwd *pwentp;
+  struct passwd pw;
+  struct passwd *pwp;
   struct group grp;
   struct group *grpt;
   struct tm time;
@@ -104,8 +104,8 @@ int ex_lp()
       {
         printf("%10.10s", get_perms(sb.st_mode));
         printf(" %d", sb.st_nlink);
-        if (!getpwuid_r(sb.st_uid, &pwent, buf, sizeof(buf), &pwentp))
-          printf(" %s", pwent.pw_name);
+        if (!getpwuid_r(sb.st_uid, &pw, buf, sizeof(buf), &pwp))
+          printf(" %s", pw.pw_name);
         else
           printf(" %d", sb.st_uid);
        if (!getgrgid_r (sb.st_gid, &grp, buf, sizeof(buf), &grpt))
