@@ -1,5 +1,5 @@
 //**********************************
-//  Shell code
+// melshell code 
 //**********************************
 
 #include <iostream>
@@ -7,9 +7,13 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/dir.h>
+#include <unistd.h>
+#include <libgen.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <pwd.h>
 
 using namespace std;
-
 //char pathname[MAXPATHLEN];
 
 int main()
@@ -25,21 +29,28 @@ int main()
     else if ( command == "ls" )
       ls();
     else if ( command == "ps" )
-      ps();
+      pidaux();
     else if ( command != "\0" )
       cout << "Error: Unknown Command";
-
-    cout << "\n%_ ";
-    cin >> command;
-  }
+      
+      cout << "\n#_ ";
+      cin >> command;
+}
   return 0;
 }
+
 int ls()
 {
-  int i;
-  struct dirent **files;
-  //if(!getcwd(pathname, sizeof(pathname)))                                      
-  //  cout <<  "Error getting pathname\n";
-  //cout << "Current Working Directory = " << pathname;
-  //count = scandir( pathname, &files, file_selecto, alphasort );
-  //if(count <= 0)
+  struct dirent *f;
+  DIR *md;
+  char* di=(char*)get_current_dir_name();
+  md = opendir(di);
+  while (( f = readdir(md)) != NULL ) 
+    cout <<"\n "<<f->d_name; 
+  return 0;
+}
+
+int ps()
+{
+  cout<< "this is test";
+}
