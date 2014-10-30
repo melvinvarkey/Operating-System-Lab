@@ -49,7 +49,7 @@ const char *get_perms(mode_t mode)
   if (S_ISBLK(mode)) ftype = 'b';
   if (S_ISCHR(mode)) ftype = 'c';
   if (S_ISFIFO(mode)) ftype = '|';
-  sprintf(perms_buff, "%c%c%c%c%c%c%c%c%c%c %c%c%c", ftype,
+  sprintf(perms_buff, "%c%c%c%c%c%c%c%c%c", ftype,
    mode & S_IRUSR ? 'r' : '-',
    mode & S_IWUSR ? 'w' : '-',
    mode & S_IXUSR ? 'x' : '-',
