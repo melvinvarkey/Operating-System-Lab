@@ -21,10 +21,32 @@
 #include <fcntl.h>
 #define FALSE 0
 #define TRUE !FALSE
+int ex_a();
+int ex_l();
+int ex_lp();
+int ex_ls();
+
 extern int asort();
 static char pbuff[30];
 char pname[MAXLEN];
 
+int main(int argc, char* argv[])
+{
+  if (argc == 2)
+  {
+    if (!strcmp(argv[1], "-a"))
+      ex_a();
+    if (!strcmp(argv[1], "-l"))
+      ex_lp();
+  }
+  if (argc == 3)
+  {
+    strcpy(pname, argv[2]);
+    ex_l();
+  }
+  if (argc == 1)
+    ex_ls();
+}
 int ex_a()
 {
   int count,i;
@@ -185,21 +207,3 @@ int f_sel(struct dirent *entry)
     return (TRUE);
 }
 
-
-int main(int argc, char* argv[])
-{
-  if (argc == 2)
-  {
-    if (!strcmp(argv[1], "-a"))
-      ex_a();
-    if (!strcmp(argv[1], "-l"))
-      ex_lp();
-  }
-  if (argc == 3)
-  {
-    strcpy(pname, argv[2]);
-    ex_l();
-  }
-  if (argc == 1)
-    ex_ls();
-}
