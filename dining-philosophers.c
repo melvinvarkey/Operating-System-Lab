@@ -1,5 +1,5 @@
 //----------------------------
-// Dinning-philosophers 
+// Dining-philosophers 
 //----------------------------
 
 #include<stdio.h>
