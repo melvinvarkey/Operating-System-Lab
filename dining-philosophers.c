@@ -85,4 +85,3 @@ void put_fork(int ph_num)
     test(RIGHT);
     sem_post(&mutex);
 }
-1
